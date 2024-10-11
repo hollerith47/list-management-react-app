@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+import Items from "./components/Items";
 
 function App() {
+  const [items,setItems] = useState([]);
+  const [key,setKey] = useState(1);
+
+
+  const add = () => {
+    const name = "Item " + key;
+    setKey(key + 1);  // Increment the key to ensure unique ids for each new item.
+    items.push({name, key});
+    setItems([...items]);
+    // console.log(items)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <button  onClick={add}>Add Item</button>
+      <Items items={items} setItems={setItems} />
+    </>
   );
 }
 
